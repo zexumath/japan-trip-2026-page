@@ -13,10 +13,6 @@
 <style>
 :root{--bg:#f7f3ea;--bg2:#efe7d6;--card:#fffdf6;--ink:#2c2a26;--sub:#7a7364;--line:#e2d9c4;--accent:#c6402b;--accent2:#1f6f8b;--chipbg:#fff7ec;--radius:18px;--shadow:0 1px 2px rgba(60,40,20,.06),0 8px 24px -14px rgba(60,40,20,.25);}html[data-theme="dark"]{--bg:#12151c;--bg2:#181c26;--card:#1d2230;--ink:#e8e4d8;--sub:#9a9fb0;--line:#333a4c;--accent:#ff8a6b;--accent2:#7fc3d9;--chipbg:#232a3b;--shadow:0 1px 2px rgba(0,0,0,.35),0 10px 28px -14px rgba(0,0,0,.55);}*{box-sizing:border-box}html{-webkit-text-size-adjust:100%}body{margin:0;background:var(--bg);color:var(--ink);font-family:"PingFang SC","Hiragino Sans GB","Microsoft YaHei","Noto Sans SC",-apple-system,sans-serif;transition:background .35s ease,color .35s ease;padding-bottom:64px}.wrap{max-width:760px;margin:0 auto;padding:0 16px}section{margin:26px 0}.card{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);box-shadow:var(--shadow);padding:18px 16px;overflow:hidden}.card h2{font-size:1.28rem;margin:0 0 12px}.card h2 .zh{color:var(--accent)}a{color:var(--accent2);text-decoration:none;border-bottom:1px dashed currentColor;cursor:pointer}.topbar{display:flex;align-items:center;justify-content:space-between;padding:14px 0 6px}.brand{font-weight:700;letter-spacing:.5px}.theme-toggle{background:none;border:1px solid var(--line);color:var(--sub);border-radius:999px;padding:4px 10px;font-size:.82rem;cursor:pointer}.now{background:linear-gradient(135deg,#c6402b,#a33a24);color:#fff;position:relative;overflow:hidden}html[data-theme="dark"] .now{background:linear-gradient(135deg,#a63a26,#7c2c1e)}.now h2{color:#fff;font-size:1.15rem;margin-bottom:6px}.next-label{font-size:.92rem;opacity:.95}.next-title{font-weight:700;font-size:1.3rem;margin:8px 0 12px}.countdown{display:flex;gap:8px;margin:8px 0;flex-wrap:wrap}.cd{background:rgba(255,255,255,.16);border:1px solid rgba(255,255,255,.25);border-radius:14px;padding:10px 6px;text-align:center;min-width:74px;flex:1}.cd b{display:block;font-size:1.9rem;font-variant-numeric:tabular-nums;letter-spacing:1px}.cd span{font-size:.74rem;opacity:.92}.now .tz-note{font-size:.8rem;opacity:.9;margin-top:8px}.events-more{margin-top:10px;border-top:1px dashed rgba(255,255,255,.35);padding-top:8px}.events-more .ev{font-size:.85rem;padding:2px 0}.mapbox{border:1px dashed var(--line);border-radius:14px;background:repeating-linear-gradient(45deg,transparent 0 14px,var(--bg2) 14px 28px);min-height:150px;display:flex;align-items:center;justify-content:center;color:var(--sub);font-size:.95rem;text-align:center;padding:18px}.legend{display:flex;flex-wrap:wrap;gap:6px 12px;margin-top:12px}.legend .li{display:flex;align-items:center;gap:6px;font-size:.8rem;color:var(--sub)}.dot{width:12px;height:12px;border-radius:50%;display:inline-block;flex:none}.flight{display:flex;gap:12px;padding:12px 0;border-top:1px dashed var(--line)}.flight:first-of-type{border-top:0;padding-top:0}.flight .leg{flex:0 0 52px;font-weight:700;color:var(--accent)}.flight .mid{flex:1 1 300px;min-width:200px}.flight .mid .rt{font-weight:600}.tz-line{font-size:.82rem;color:var(--sub);margin-top:4px}.locline{font-size:.86rem;margin-top:2px}.badge{font-size:.7rem;padding:1px 8px;border-radius:999px;border:1px solid currentColor;white-space:nowrap;margin-left:6px;vertical-align:1px}.badge.ok{color:#1c7c4d}.day{border-top:1px dashed var(--line);padding:10px 0}.day:first-of-type{border-top:0}.day-head{display:flex;align-items:center;gap:10px;cursor:pointer;list-style:none;flex-wrap:wrap}.day-head::-webkit-details-marker{display:none}.day-num{font-weight:700;color:#fff;width:30px;height:30px;border-radius:10px;display:inline-flex;align-items:center;justify-content:center;flex:none}.day-title{font-weight:700;font-size:1.02rem}.day-hint{margin-left:auto;color:var(--sub);font-size:.78rem}.day-body{margin:8px 0 2px 40px;font-size:.93rem}.route-mini{margin-top:10px;border:1px dashed var(--line);border-radius:10px;padding:10px;background:var(--bg2);color:var(--sub);font-size:.85rem}.route-mini button{background:var(--accent2);color:#fff;border:0;border-radius:8px;padding:7px 10px;font-size:.85rem;cursor:pointer}.todo-note{color:var(--sub);font-size:.85rem;margin-bottom:10px}.warn{display:block;color:var(--sub);font-size:.78rem;margin-top:2px;line-height:1.5}
 .what{line-height:1.55}
-.mapbar{display:flex;align-items:center;gap:10px;flex-wrap:wrap;margin-bottom:10px}.mapbar-label{font-size:.85rem;color:var(--sub)}
-.seg{display:inline-flex;border:1px solid var(--line);border-radius:999px;overflow:hidden}
-.seg button{background:none;border:0;padding:5px 12px;font-size:.85rem;color:var(--sub);cursor:pointer}
-.seg button.on{background:var(--accent2);color:#fff}
 ol.todos{margin:0;padding-left:20px}ol.todos li{padding:9px 0 9px 4px;border-bottom:1px dashed var(--line);font-size:.94rem}ol.todos li:last-child{border-bottom:0}ol.todos li::marker{font-weight:700;color:var(--accent2)}.todo-tag{font-size:.72rem;border:1px solid var(--line);border-radius:6px;padding:0 6px;color:var(--sub);margin-left:6px;white-space:nowrap}.prio{color:var(--accent);font-weight:700;margin-right:4px}.tips{list-style:none;margin:0;padding:0}.tips li{display:flex;gap:10px;padding:8px 0;border-bottom:1px dashed var(--line);font-size:.92rem}.tips li:last-child{border-bottom:0}.tips .ic{flex:none;width:26px;text-align:center}footer{margin-top:34px;text-align:center;color:var(--sub);font-size:.78rem;padding:0 8px}.privacy{color:var(--sub);border:1px dashed var(--line);border-radius:10px;padding:8px 12px;margin-top:10px}@media (prefers-reduced-motion: reduce){*{animation:none!important;transition:none!important}}
 </style>
 </head>
@@ -36,8 +32,7 @@ ol.todos{margin:0;padding-left:20px}ol.todos li{padding:9px 0 9px 4px;border-bot
 <div class="events-more" id="eventsMore"></div>
 </div></section>
 <section aria-labelledby="h-map"><div class="card"><h2><span class="zh">行程总览</span> · 地图</h2>
-<div class="mapbar"><span class="mapbar-label">🧭 导航方式</span><div class="seg" id="mapSeg"></div></div>
-      <div class="mapbox">🗾 手绘风 SVG 路线地图位<br><span style="font-size:.84rem">发来各日目的地/酒店后，这里按天用不同颜色画路线并标出每晚住宿；下方颜色点对应「第几晚」。</span></div>
+<div class="mapbox">🗾 手绘风 SVG 路线地图位<br><span style="font-size:.84rem">发来各日目的地/酒店后，这里按天用不同颜色画路线并标出每晚住宿；下方颜色点对应「第几晚」。</span></div>
 <div class="legend" id="legend"></div>
 </div></section>
 <section aria-labelledby="h-conf"><div class="card"><h2><span class="zh">已确认</span> · 机票 / 酒店 / 租车 / 门票</h2><div id="confirmedList"></div></div></section>
@@ -180,46 +175,12 @@ var more=[];EVENTS.forEach(function(x){if(x!==ev){var t=tzText(x.when);more.push
 $("#eventsMore").innerHTML=more.join("");
 startTick(pick.at);
 }
-var MAP_NAME={google:"谷歌地图",apple:"Apple 地图",amap:"高德地图"};
-var mapProvider=(function(){try{return localStorage.getItem("tp_map")||"amap";}catch(e){return "amap";}})();
-function mapProviderShort(){return mapProvider==="google"?"谷歌":(mapProvider==="apple"?"Apple":"高德");}
-function mapSearch(q){
-  if(mapProvider==="apple")return "https://maps.apple.com/?q="+encodeURIComponent(q);
-  if(mapProvider==="amap")return "https://uri.amap.com/search?keyword="+encodeURIComponent(q)+"&callnative=1";
-  return "https://www.google.com/maps/search/?api=1&query="+encodeURIComponent(q);
-}
-function mapLink(q){return mapSearch(q);}
-function dirLink(stops){
-  var nm=function(s){return typeof s==="string"?s:(s&&(s.name||s.addr)||"");};
-  var list=(stops||[]).slice();
-  var names=list.map(nm).filter(function(x){return x;});
-  if(names.length<2)return mapSearch(names[0]||"");
-  if(mapProvider==="google"){
-    var a=new URLSearchParams();a.set("api","1");a.set("origin",names[0]);a.set("destination",names[names.length-1]);
-    if(names.length>2)a.set("waypoints",names.slice(1,-1).join("|"));
-    return "https://www.google.com/maps/dir/?"+a.toString();
-  }
-  if(mapProvider==="apple")return "https://maps.apple.com/?saddr="+encodeURIComponent(names[0])+"&daddr="+encodeURIComponent(names[names.length-1])+"&dirflg=d";
-  var hasCoord=list.every(function(s){return s&&typeof s==="object"&&s.lat!=null&&s.lng!=null;});
-  if(hasCoord){var f=list[0],z=list[list.length-1];
-    return "https://uri.amap.com/navigation?from="+f.lng+","+f.lat+","+encodeURIComponent(nm(f))+"&to="+z.lng+","+z.lat+","+encodeURIComponent(nm(z))+"&mode=car&policy=1&coordinate=gaode&callnative=1";}
-  return "https://uri.amap.com/search?keyword="+encodeURIComponent(names[0])+"&callnative=1";
-}
-function renderMapSeg(){
-  var host=document.getElementById("mapSeg");if(!host)return;
-  var order=["google","apple","amap"],out=[];
-  order.forEach(function(pp){out.push("<button data-p=\""+pp+"\" class=\""+(pp===mapProvider?"on":"")+"\">"+MAP_NAME[pp]+"</button>");});
-  host.innerHTML=out.join("");
-  host.querySelectorAll("button[data-p]").forEach(function(b){b.onclick=function(){
-    mapProvider=b.getAttribute("data-p");
-    try{localStorage.setItem("tp_map",mapProvider);}catch(e){}
-    renderMapSeg();renderConfirmed();renderDays();
-  };});
-}
+function mapLink(q){return "https://www.google.com/maps/search/?api=1&query="+encodeURIComponent(q);}
+function dirLink(stops){var a=new URLSearchParams();a.set("api","1");a.set("origin",stops[0].name||stops[0]);a.set("destination",stops[stops.length-1].name||stops[stops.length-1]);if(stops.length>2){var mid=stops.slice(1,-1).map(function(s){return s.name||s;});a.set("waypoints",mid.join("|"));}return "https://www.google.com/maps/dir/?"+a.toString();}
 function renderConfirmed(){var host=document.getElementById("confirmedList"),out=[];
 if(!DATA.confirmed.length){host.innerHTML="<div style=\"color:var(--sub);padding:4px 0\">暂无 — 截图陆续补充中。</div>";return;}
 DATA.confirmed.forEach(function(c){var tz=c.when?tzText(c.when):null;
-var map=c.mapQuery?(" <a class=\"map\" href=\""+mapLink(c.mapQuery)+"\" target=\"_blank\" rel=\"noopener\">📍 "+mapProviderShort()+"</a>"):"";
+var map=c.mapQuery?(" <a class=\"map\" href=\""+mapLink(c.mapQuery)+"\" target=\"_blank\" rel=\"noopener\">📍 地图</a>"):"";
 out.push("<div class=\"flight\"<div class=\"leg\">"+(c.leg||c.kind)+"</div><div class=\"mid\">");
 out.push("<div class=\"rt\">✈ "+c.route+" <span class=\"badge "+(c.status||"ok")+"\">"+(c.statusText||"")+"</span></div>");
 if(c.when)out.push("<div class=\"locline\"><b>"+c.when.date+" "+c.when.time+"</b> · "+tzNameZh(c.when.tz)+"</div><div class=\"tz-line\">当地："+tz.local+" ／ 你那边："+tz.yours+"</div>");
@@ -231,8 +192,8 @@ host.innerHTML=out.join("");}
 function zhMD(iso,tz){var e=wallEpoch(iso,"12:00",tz||"Asia/Tokyo");return new Intl.DateTimeFormat("zh-CN",{timeZone:tz||"Asia/Tokyo",month:"numeric",day:"numeric"}).format(e)+" "+new Intl.DateTimeFormat("zh-CN",{timeZone:tz||"Asia/Tokyo",weekday:"short"}).format(e);}
 function renderDays(){var host=document.getElementById("daysList"),out=[];
 DATA.days.forEach(function(d,i){var col=DATA.DAY_COLORS[i%DATA.DAY_COLORS.length];var stops=(d.route&&d.route.length)?d.route:[];
-var nav=stops.length>=2?("<div class=\"route-mini\"><button data-nav=\""+i+"\">🧭 全天导航（"+mapProviderShort()+"）</button></div>"):("<div class=\"route-mini\">🗺️ 当日单点行程（≥2 个地点后可一键全天导航）</div>");
-var items="";if(d.items&&d.items.length){items="<ul class=\"timeline\">";d.items.forEach(function(it){var tzc=it.tz?("<span class=\"t-tz\">"+tzNameZh(it.tz)+"</span>"):"";items+="<li><div class=\"t-time\">"+(it.time||"—")+tzc+"</div><div class=\"what\">"+(it.what||"");if(it.book)items+=" <span class=\"need-ticket\">需提前订票</span>";if(it.link)items+=" <a class=\"map\" href=\""+mapLink(it.link)+"\" target=\"_blank\" rel=\"noopener\">📍 "+mapProviderShort()+"</a>";if(it.warn)items+="<span class=\"warn\">※ "+it.warn+"</span>";items+="</div></li>";});items+="</ul>";}
+var nav=stops.length>=2?("<div class=\"route-mini\"><button data-nav=\""+i+"\">🧭 一键打开当天多点导航（Google 地图）</button></div>"):("<div class=\"route-mini\">🗺️ 当日单点行程（≥2 个地点后可一键全天导航）</div>");
+var items="";if(d.items&&d.items.length){items="<ul class=\"timeline\">";d.items.forEach(function(it){var tzc=it.tz?("<span class=\"t-tz\">"+tzNameZh(it.tz)+"</span>"):"";items+="<li><div class=\"t-time\">"+(it.time||"—")+tzc+"</div><div class=\"what\">"+(it.what||"");if(it.book)items+=" <span class=\"need-ticket\">需提前订票</span>";if(it.link)items+=" <a class=\"map\" href=\""+mapLink(it.link)+"\" target=\"_blank\" rel=\"noopener\">📍地图</a>";if(it.warn)items+="<span class=\"warn\">※ "+it.warn+"</span>";items+="</div></li>";});items+="</ul>";}
 out.push("<details class=\"day\"<summary class=\"day-head\"<span class=\"day-num\" style=\"background:"+col+"\">"+(i+1)+"</span><span class=\"day-title\">"+zhMD(d.date,"Asia/Tokyo")+" · "+d.theme+"</span><span class=\"day-hint\">"+(d.anchor?"⚠️ 含航班锚点":"")+"</span></summary>");
 out.push("<div class=\"day-body\"<div>🏨 "+d.stays+"</div>");
 if(d.anchor)out.push("<div style=\"margin-top:4px\">✈ "+d.anchor+"</div>");
@@ -247,7 +208,7 @@ var themeMode="auto";
 function themeFromClock(){var h=new Date().getHours();return (h>=6&&h<19)?"light":"dark";}
 function applyTheme(mode){var m=mode==="auto"?themeFromClock():mode;document.documentElement.setAttribute("data-theme",m);var b=document.getElementById("themeToggle");b.textContent=mode==="auto"?"🌓 自动（当前"+(m==="light"?"白天":"黑夜")+"）":(m==="light"?"☀️ 白天":"🌙 黑夜");}
 function nextMode(){var o=["auto","light","dark"];return o[(o.indexOf(themeMode)+1)%3];}
-window.addEventListener("DOMContentLoaded",function(){try{themeMode=localStorage.getItem("tp_theme")||"auto";}catch(e){}applyTheme(themeMode);document.getElementById("themeToggle").onclick=function(){themeMode=nextMode();applyTheme(themeMode);try{localStorage.setItem("tp_theme",themeMode);}catch(e){}};setInterval(function(){if(themeMode==="auto")applyTheme("auto");},60000);renderMapSeg();renderNow();renderConfirmed();renderDays();renderTodos();renderTips();renderLegend();});
+window.addEventListener("DOMContentLoaded",function(){try{themeMode=localStorage.getItem("tp_theme")||"auto";}catch(e){}applyTheme(themeMode);document.getElementById("themeToggle").onclick=function(){themeMode=nextMode();applyTheme(themeMode);try{localStorage.setItem("tp_theme",themeMode);}catch(e){}};setInterval(function(){if(themeMode==="auto")applyTheme("auto");},60000);renderNow();renderConfirmed();renderDays();renderTodos();renderTips();renderLegend();});
 </script>
 </body>
 </html>

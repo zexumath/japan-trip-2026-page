@@ -49,92 +49,112 @@ ol.todos{margin:0;padding-left:20px}ol.todos li{padding:9px 0 9px 4px;border-bot
 <script>
 var DATA = {
   title: "日本之旅 · 2026年11月 · 三人行",
-  confirmed: [ /* 只放你发截图确认过的 */
-    { kind:"flight", leg:"去程", status:"ok", statusText:"已出票",
-      route:"纽瓦克 EWR → 东京", people:"A + B（均已出票，B 同行人详情截图待补）",
+  confirmed: [ /* 只放你发截图/邮件确认过的；不含任何确认号 */
+    { kind:"flight", leg:"去程 A/B", status:"ok", statusText:"已出票",
+      route:"纽瓦克 EWR → 东京成田 NRT", people:"A + B（同行程；B 详情截图待补）",
       when:{ date:"2026-11-25", time:"10:55", tz:"America/New_York" },
       where:"起飞：纽瓦克自由国际机场 EWR",
-      note:"到达成田 NRT；到达时刻与航班号待补（B 截图待补）",
+      note:"到达成田 NRT；到达时刻与航班号待补",
       mapQuery:"Newark Liberty International Airport" },
-    { kind:"flight", leg:"回程", status:"ok", statusText:"已出票",
-      route:"东京羽田 HND → 北京", people:"A + B（B 同机已出票，截图待补）",
-      when:{ date:"2026-12-03", time:"14:20", tz:"Asia/Tokyo" },
-      where:"起飞：东京羽田机场 HND",
-      note:"到达时刻/航班号待补；C 拟同坐 12/3 回北京，尚未订票",
-      mapQuery:"Tokyo Haneda Airport" }
+    { kind:"flight", leg:"去程 C", status:"ok", statusText:"已出票",
+      route:"北京 PEK → 东京羽田 HND", people:"C（里程票 · 经济舱）",
+      when:{ date:"2026-11-26", time:"15:25", tz:"Asia/Shanghai" },
+      where:"PEK 15:25 起飞 ／ HND 19:50 到达（东京时间）· CA421 国航执飞",
+      note:"行李 2 件 23kg；A/B 当天从成田 NRT 抵达，两个机场不同",
+      mapQuery:"Beijing Capital International Airport" },
+    { kind:"flight", leg:"回程 A", status:"ok", statusText:"已改期出票",
+      route:"东京羽田 HND → 北京 PEK", people:"A（B 是否同班待确认）",
+      when:{ date:"2026-12-03", time:"17:25", tz:"Asia/Tokyo" },
+      where:"HND 17:25 起飞 ／ PEK 20:35 到达（北京时间）· NH963 全日空执飞",
+      note:"原 14:20 已改到 17:25（无改签费，已确认）；C 的回程尚未订",
+      mapQuery:"Tokyo Haneda Airport" },
+    { kind:"hotel", leg:"酒店", status:"ok", statusText:"已确认",
+      route:"横滨 · The Kahala Hotel & Resort Yokohama",
+      people:"A + B（只订了 2 人 ⚠️ 第 3 人需加床/加房）",
+      when:{ date:"2026-12-01", time:"15:00", tz:"Asia/Tokyo" },
+      where:"入住 12/1 15:00 → 退房 12/3 12:00（2 晚）· 1-1-3 Minatomirai, Yokohama 220-0012 · 电话 +81-45-5220088",
+      note:"房型 Grand Twin 禁烟；FHR 权益：每日双人早餐、100 美元消费额度、可争取 12:00 早入住与 16:00 延迟退房；免费取消截止 11/29 23:59（日本时间），之后取消收 100%",
+      mapQuery:"The Kahala Hotel & Resort Yokohama" }
   ],
   days: [
-    { date:"2026-11-26", theme:"到达日 · 东京（候选）", stays:"东京 · 第 1 晚（酒店待定；建议 7 晚不换宿，住新宿/东京站/银座一带交通最省）",
-      anchor:"落地成田 NRT（到达时刻待补）→ 进市区约 40–60 分钟", route:["成田机场"],
+    { date:"2026-11-26", theme:"到达日 · 东京集合（候选）", stays:"东京 · 第 1 晚（酒店未订）",
+      anchor:"A/B 抵达成田 NRT（时刻待补）；C 乘 CA421 19:50 抵羽田 HND",
+      route:["成田机场","东京站","羽田机场"],
       items:[
-        { time:"到港后", what:"成田机场 → 市区：Skyliner 至上野/日暮里，或成田特快 NEX 至东京站（若到港偏晚则直接去酒店）", link:"成田机场" },
-        { time:"傍晚", what:"酒店放行李 → 就近晚餐（先倒时差，不硬逛）", warn:"首日不排紧行程" }
+        { time:"白天", what:"A/B 抵达成田 NRT → 进市区（Skyliner 或 NEX，约 40–60 分钟）", link:"成田机场" },
+        { time:"19:50", what:"C 抵达羽田 HND（CA421）→ 进市区约 30–40 分钟", link:"羽田机场", warn:"两个机场不同；若 A/B 也当晚到，建议直接在酒店集合" },
+        { time:"夜间", what:"三人汇合、就近晚餐、休息", warn:"首日不排紧行程，先倒时差" }
       ] },
-    { date:"2026-11-27", theme:"上野・浅草・秋叶原（候选）", stays:"东京 · 第 2 晚（待定）",
+    { date:"2026-11-27", theme:"上野・浅草・秋叶原（候选）", stays:"东京 · 第 2 晚（酒店未订）",
       route:["浅草寺","东京国立博物馆","阿美横町","秋叶原"],
       items:[
         { time:"09:00", what:"浅草寺・仲见世通（雷门打卡，免费）", link:"浅草寺" },
-        { time:"11:30", what:"东京国立博物馆（本馆/东洋馆；特展另购票）", link:"东京国立博物馆", warn:"国立系展馆周一闭馆，特意排周五；特展开放日期与门票以官网为准" },
+        { time:"11:30", what:"东京国立博物馆（本馆/东洋馆；特展另购票）", link:"东京国立博物馆", warn:"国立系展馆周一闭馆，特意排周五；特展日期与门票以官网为准" },
         { time:"15:00", what:"阿美横町（药妆/零食）或谷中银座散步，二选一", link:"阿美横町" },
         { time:"19:00", what:"秋叶原（电器街/动漫，夜晚也热闹）", link:"秋叶原" }
       ] },
-    { date:"2026-11-28", theme:"涩谷・原宿・表参道（候选 · 周末人流大）", stays:"东京 · 第 3 晚（待定）",
+    { date:"2026-11-28", theme:"涩谷・原宿・表参道（候选 · 周末人流大）", stays:"东京 · 第 3 晚（酒店未订）",
       route:["明治神宫","竹下通","表参道","涩谷"],
       items:[
         { time:"09:00", what:"明治神宫（免费，晨间清静）", link:"明治神宫" },
-        { time:"11:00", what:"原宿・竹下通（年轻潮牌）", link:"竹下通" },
-        { time:"13:00", what:"表参道散步/午餐（可选根津美术馆，周一闭馆不影响）", link:"表参道" },
-        { time:"16:30", what:"SHIBUYA SKY 展望台（挑日落前时段）", link:"Shibuya Sky", book:true, warn:"热门时段需提前 1–2 周订票；出发前看天气，阴雨天可改期" },
+        { time:"11:00", what:"原宿・竹下通", link:"竹下通" },
+        { time:"13:00", what:"表参道散步/午餐（可选根津美术馆）", link:"表参道" },
+        { time:"16:30", what:"SHIBUYA SKY 展望台（挑日落前时段）", link:"Shibuya Sky", book:true, warn:"热门时段需提前 1–2 周订票；阴雨天可改期" },
         { time:"19:00", what:"涩谷或新宿晚餐", link:"涩谷" }
       ] },
-    { date:"2026-11-29", theme:"皇居・丸之内・银座・teamLab（候选）", stays:"东京 · 第 4 晚（待定）",
+    { date:"2026-11-29", theme:"皇居・丸之内・银座・teamLab（候选）", stays:"东京 · 第 4 晚（酒店未订）",
       route:["皇居东御苑","东京站","银座","teamLab Planets"],
       items:[
         { time:"09:30", what:"皇居东御苑（免费，简单安检；周日开放）", link:"皇居东御苑", warn:"休苑日为周一与周五，已避开；以宫内厅官网公告为准" },
         { time:"12:00", what:"东京站・丸之内（KITTE 屋顶庭院免费眺望）", link:"东京站" },
         { time:"14:30", what:"银座逛街/下午茶", link:"银座" },
-        { time:"17:00", what:"teamLab Planets（丰洲）或 teamLab Borderless（麻布台）二选一", link:"teamLab Planets", book:true, warn:"需官网提前订票（建议 1–4 周），周末时段紧张" }
+        { time:"17:00", what:"teamLab Planets（丰洲）或 teamLab Borderless（麻布台）二选一", link:"teamLab Planets", book:true, warn:"需官网提前订票（建议 1–4 周）" }
       ] },
-    { date:"2026-11-30", theme:"镰仓一日（候选 A · 避开东京展馆周一闭馆）", stays:"东京 · 第 5 晚（待定；当天往返）",
+    { date:"2026-11-30", theme:"镰仓一日（候选 A · 避开东京展馆周一闭馆）", stays:"东京 · 第 5 晚（酒店未订；当天往返）",
       route:["鹤冈八幡宫","小町通","高德院（镰仓大佛）","江之岛"],
       items:[
         { time:"08:30", what:"东京 → 镰仓（JR 横须贺线约 1 小时）", link:"镰仓站" },
         { time:"10:00", what:"鹤冈八幡宫・小町通", link:"鹤冈八幡宫" },
         { time:"12:30", what:"高德院 镰仓大佛・长谷寺", link:"高德院" },
         { time:"14:30", what:"江之电：镰仓高校前/江之岛（天晴可见富士山）", link:"镰仓高校前" },
-        { time:"18:00", what:"返回东京", warn:"周一是东京多数美术馆/庭园休馆日，故安排镰仓；寺社无统一休馆，个别宝物馆仍以官网为准" },
-        { time:"备选 B", what:"若下雨改室内：台场（海滨公园/DiverCity 高达像/彩虹大桥夜景）", link:"台场" }
+        { time:"18:00", what:"返回东京", warn:"周一是东京多数美术馆休馆日，故安排镰仓" },
+        { time:"备选 B", what:"若下雨改室内：台场（海滨公园/彩虹大桥夜景）", link:"台场" }
       ] },
-    { date:"2026-12-01", theme:"迪士尼海洋（候选 A）／ 台场・丰洲（候选 B）", stays:"东京 · 第 6 晚（待定）",
+    { date:"2026-12-01", theme:"东京 → 横滨（Kahala 入住）", stays:"横滨 Kahala · 第 6 晚（已订）",
+      anchor:"横滨 Kahala 15:00 入住（FHR 可争取 12:00 早入住）",
+      route:["东京站","横滨站","港未来","横滨红砖仓库"],
       items:[
-        { time:"08:00", what:"迪士尼海洋（TDR App 提前购票并预约热门项目/演出）", link:"东京迪士尼海洋", book:true, warn:"平日仍建议开园前到；App 购票/预约最稳，提前查当日运营时间" },
-        { time:"20:00", what:"返回市区（舞浜 → 东京约 30–45 分钟）", link:"舞浜站" },
-        { time:"备选 B", what:"不玩乐园：台场海滨公园 → 丰洲市场午餐 → 台场购物/看彩虹大桥夜景", link:"台场" }
+        { time:"上午", what:"东京退房/寄存，搭 JR 到横滨（约 25–35 分钟）", link:"横滨站" },
+        { time:"15:00", what:"Kahala 入住（1-1-3 Minatomirai，港未来站步行可达）", link:"The Kahala Hotel & Resort Yokohama", warn:"酒店只订了 2 人：第 3 人的加床/加房请在入住前确认" },
+        { time:"傍晚", what:"港未来散步：红砖仓库、杯面博物馆、夜景", link:"横滨红砖仓库" }
       ] },
-    { date:"2026-12-02", theme:"吉卜力・吉祥寺（候选 A）／ 新宿・都厅（候选 B）", stays:"东京 · 第 7 晚（待定）",
-      route:["三鹰之森吉卜力美术馆","井之头公园","吉祥寺"],
+    { date:"2026-12-02", theme:"横滨一日（候选 · 也可回东京补货）", stays:"横滨 Kahala · 第 7 晚（已订）",
+      route:["横滨中华街","山下公园","港未来","横滨地标塔"],
       items:[
-        { time:"10:00", what:"三鹰之森吉卜力美术馆（12/2 周三开馆，周二闭馆已避开）", link:"吉卜力美术馆", book:true, warn:"门票需提前约 1 个月在官方渠道抢；抢不到 → 直接切候选 B：新宿御苑（周三开）+ 东京都厅展望（免费夜景）＋新宿购物" },
-        { time:"13:00", what:"井之头公园・吉祥寺散步（平价药妆/小吃）", link:"吉祥寺" },
-        { time:"17:00", what:"回东京，收行李准备返程", link:"新宿" }
+        { time:"10:00", what:"横滨中华街・山下公园・冰川丸", link:"横滨中华街" },
+        { time:"14:00", what:"港未来购物 / 地标塔展望（或回东京买伴手礼）", link:"横滨地标塔" },
+        { time:"19:00", what:"酒店晚餐或港未来夜景", warn:"想安排东京补货的话，此日可改成往返东京" }
       ] },
-    { date:"2026-12-03", theme:"回程日（东京 → 羽田 HND → 北京）", stays:"无住宿（14:20 HND 起飞）",
-      anchor:"东京时间 14:20 羽田 HND 起飞（A/B 已出票，C 待订同班）",
+    { date:"2026-12-03", theme:"回程日（HND 17:25 → 北京）", stays:"无住宿（12:00 退房）",
+      anchor:"HND 17:25 → PEK 20:35（NH963；A 已出票，C 待订）",
       items:[
-        { time:"09:00", what:"早餐后退房，行李寄存或直接带走", link:"酒店" },
-        { time:"11:00", what:"出发往羽田（京急/东京单轨约 30–50 分钟），12:20 前到机场办理国际航班手续", link:"羽田机场", warn:"国际航班建议起飞前 2–3 小时到；想补货的店请提前一晚买好" }
+        { time:"上午", what:"横滨晨间散步/早餐（酒店早餐建议提前预约 045-522-0088）", link:"港未来" },
+        { time:"12:00", what:"退房（FHR 可争取 16:00 延迟退房，视房态）", warn:"退房后行李可寄存酒店" },
+        { time:"14:30", what:"前往羽田 HND（横滨→HND 约 30–40 分钟），15:25 前到机场", link:"羽田机场", warn:"国际航班建议起飞前 2 小时以上到达" }
       ] }
-  ],  DAY_COLORS: ["#c6402b","#e08a2e","#d4af37","#4a8f4a","#1f6f8b","#7a5fa8","#c2557d","#8a6d4a"],
+  ],
+  DAY_COLORS: ["#c6402b","#e08a2e","#d4af37","#4a8f4a","#1f6f8b","#7a5fa8","#c2557d","#8a6d4a"],
   todos: [
-    { t:"同行人 C 的去程机票", tag:"机票", prio:1, d:"北京 → 东京，倾向落地成田 NRT、11/26 与 A/B 同天到达汇合。注意跨时差：11/25 EWR 起飞、11/26 才到日本，订票日期别错" },
-    { t:"同行人 C 的回程机票", tag:"机票", prio:1, d:"倾向与 A/B 同坐 12/03 HND 14:20 → 北京（尚未订票，需尽快定）" },
-    { t:"补齐 A/B 两程出票详情", tag:"机票", prio:1, d:"航班号、到达时刻、是否直飞、舱位、行李额；并补发 B 的同行人出票详情截图（已确认与你同行程）" },
-    { t:"每晚住宿（3 人同住）", tag:"酒店", prio:1, d:"11/26–12/02 共 7 晚，房型需容纳 3 人（双床+加床/三人间等），城市随行程定" },
-    { t:"逐日行程规划", tag:"行程", prio:1, d:"以 11/26 到达、12/03 14:20 起飞为边界整体排布；需提前订票的景点先标出（规划后逐个核对闭馆日与售罄风险）" },
+    { t:"C 的回程机票", tag:"机票", prio:1, d:"需订 12/03 东京→北京；A 已改到 NH963 17:25 起飞，C 尽量同班（尚未订票）" },
+    { t:"横滨 Kahala 第 3 人", tag:"酒店", prio:1, d:"酒店只订了 2 人（Grand Twin）：需联系酒店/Amex 加第 3 人加床或加房，并确认早餐与 100 美元额度是否覆盖 3 人" },
+    { t:"东京 11/26–11/30 共 5 晚住宿", tag:"酒店", prio:1, d:"三人房型未订（11/26、27、28、29、30 五晚）；横滨 12/1–12/3 已订" },
+    { t:"确认 A/B 去程到达时刻", tag:"机票", prio:1, d:"EWR→成田 NRT 的航班号与到达时间待补截图（决定 Day1 与 C 的汇合方式）" },
+    { t:"确认 B 的回程", tag:"机票", prio:1, d:"B 是否与 A 同坐 12/03 NH963 17:25 回北京，需截图确认" },
+    { t:"逐日行程规划", tag:"行程", prio:1, d:"东京 11/26–11/30 + 横滨 12/1–12/3 整体排布；需提前订票的景点先标出" },
     { t:"需要提前预约的免费景点核对", tag:"预约", prio:1, d:"规划后逐项核对免费但需预约的热门场所，并检查闭馆日/节假日" },
-    { t:"城际交通方案", tag:"交通", prio:2, d:"新干线/铁路 or 是否租车（租车需国际驾照 IDP、靠左行驶）；顺序未定不先假设" },
-    { t:"行前准备", tag:"杂项", prio:2, d:"旅行保险、手机网络（eSIM/漫游）、交通卡（Suica/ICOCA）、现金换汇、转换插头（日本 A 型两脚）" },
-    { t:"整体时间线复查", tag:"核对", prio:2, d:"全部截图发齐后按航班时刻做冲突/合理性核对，跟你确认后才定稿" }
+    { t:"城际/市内交通方案", tag:"交通", prio:2, d:"东京—横滨 JR 约 25–35 分钟；机场往返（NRT 进东京、HND 回程）与交通 IC 卡" },
+    { t:"行前准备", tag:"杂项", prio:2, d:"保险、eSIM、交通卡、现金换汇、转换插头；C 从北京出发需备护照与日本入境材料" },
+    { t:"整体时间线复查", tag:"核对", prio:2, d:"全部截图发齐后按航班/酒店时刻做冲突核对，跟你确认后才定稿" }
   ],
   tips: [
     { ic:"🕐", t:"时区：日本无夏令时，恒为 UTC+9；美东 11 月起为 EST（UTC−5）。本页所有时间标注时区并自动换算，值机以当地时刻为准。" },
@@ -142,7 +162,9 @@ var DATA = {
     { ic:"💴", t:"现金：小店常只收现金；机场或 7-11/邮局 ATM 取现汇率较好。带 VISA/Mastercard 备用。" },
     { ic:"📶", t:"网络：建议 eSIM 或漫游包；离线地图提前下载，本页为单文件可离线查看。" },
     { ic:"🔌", t:"电压：日本 100V / A 型两脚插座；两脚设备多数可直接用，三脚需转接头。" },
-    { ic:"🗑️", t:"垃圾：车站/街边垃圾桶少，随身带垃圾袋；便利店门口垃圾桶可投。" }
+    { ic:"🗑️", t:"垃圾：车站/街边垃圾桶少，随身带垃圾袋；便利店门口垃圾桶可投。" },
+    { ic:"🏨", t:"横滨 Kahala：早餐建议提前预约（045-522-0088，10:00–17:00）；FHR 权益含每日双人早餐、100 美元消费额度，并可争取 16:00 延迟退房。" },
+    { ic:"🚄", t:"东京—横滨：JR 约 25–35 分钟；港未来线到「港未来」站步行可达 Kahala。机场段：NRT 进东京约 40–60 分钟，横滨到 HND 约 30–40 分钟。" }
   ]
 };
 
@@ -154,7 +176,7 @@ var wallEpoch=function(isoDate,hhmm,tz){var sp=isoDate.split("-"),tt=hhmm.split(
 var fmtInTz=function(epoch,tz){var md=new Intl.DateTimeFormat("zh-CN",{timeZone:tz,month:"numeric",day:"numeric"}).format(epoch);var wd=new Intl.DateTimeFormat("zh-CN",{timeZone:tz,weekday:"short"}).format(epoch);return md+" "+wd;};
 var localFmt=function(epoch){var mine=Intl.DateTimeFormat().resolvedOptions().timeZone||"当地";var d=new Date(epoch);var pad=function(x){return (x<10?"0":"")+x;};return (d.getMonth()+1)+"/"+d.getDate()+" "+pad(d.getHours())+":"+pad(d.getMinutes())+"（你的时区 "+mine+"）";};
 var tzText=function(ev){var e=wallEpoch(ev.date,ev.time,ev.tz);return {local:fmtInTz(e,ev.tz)+"（"+tzNameZh(ev.tz)+" · "+offsetLabel(e,ev.tz)+"）",yours:localFmt(e)};};
-var EVENTS=[];DATA.confirmed.forEach(function(c){if(c&&c.when)EVENTS.push({label:c.route+" · 起飞",when:c.when});});
+var EVENTS=[];DATA.confirmed.forEach(function(c){if(c&&c.when)EVENTS.push({label:c.route+(c.kind==="hotel"?" · 入住":" · 起飞"),when:c.when});});
 var eventInstant=function(w){return wallEpoch(w.date,w.time,w.tz);};
 var futureEvents=function(now){return EVENTS.map(function(x){return {ev:x,at:eventInstant(x.when)};}).filter(function(x){return x.at>now;}).sort(function(a,b){return a.at-b.at;});};
 function $(s){return document.querySelector(s);}
@@ -181,8 +203,8 @@ function renderConfirmed(){var host=document.getElementById("confirmedList"),out
 if(!DATA.confirmed.length){host.innerHTML="<div style=\"color:var(--sub);padding:4px 0\">暂无 — 截图陆续补充中。</div>";return;}
 DATA.confirmed.forEach(function(c){var tz=c.when?tzText(c.when):null;
 var map=c.mapQuery?(" <a class=\"map\" href=\""+mapLink(c.mapQuery)+"\" target=\"_blank\" rel=\"noopener\">📍 地图</a>"):"";
-out.push("<div class=\"flight\"<div class=\"leg\">"+(c.leg||c.kind)+"</div><div class=\"mid\">");
-out.push("<div class=\"rt\">✈ "+c.route+" <span class=\"badge "+(c.status||"ok")+"\">"+(c.statusText||"")+"</span></div>");
+out.push("<div class=\"flight\"><div class=\"leg\">"+(c.leg||c.kind)+"</div><div class=\"mid\">");
+out.push("<div class=\"rt\">"+(c.kind==="hotel"?"🏨":"✈")+" "+c.route+" <span class=\"badge "+(c.status||"ok")+"\">"+(c.statusText||"")+"</span></div>");
 if(c.when)out.push("<div class=\"locline\"><b>"+c.when.date+" "+c.when.time+"</b> · "+tzNameZh(c.when.tz)+"</div><div class=\"tz-line\">当地："+tz.local+" ／ 你那边："+tz.yours+"</div>");
 if(c.where)out.push("<div class=\"locline\">"+c.where+map+"</div>");
 if(c.people)out.push("<div class=\"tz-line\">👤 "+c.people+"</div>");
@@ -194,8 +216,8 @@ function renderDays(){var host=document.getElementById("daysList"),out=[];
 DATA.days.forEach(function(d,i){var col=DATA.DAY_COLORS[i%DATA.DAY_COLORS.length];var stops=(d.route&&d.route.length)?d.route:[];
 var nav=stops.length>=2?("<div class=\"route-mini\"><button data-nav=\""+i+"\">🧭 一键打开当天多点导航（Google 地图）</button></div>"):("<div class=\"route-mini\">🗺️ 当日单点行程（≥2 个地点后可一键全天导航）</div>");
 var items="";if(d.items&&d.items.length){items="<ul class=\"timeline\">";d.items.forEach(function(it){var tzc=it.tz?("<span class=\"t-tz\">"+tzNameZh(it.tz)+"</span>"):"";items+="<li><div class=\"t-time\">"+(it.time||"—")+tzc+"</div><div class=\"what\">"+(it.what||"");if(it.book)items+=" <span class=\"need-ticket\">需提前订票</span>";if(it.link)items+=" <a class=\"map\" href=\""+mapLink(it.link)+"\" target=\"_blank\" rel=\"noopener\">📍地图</a>";if(it.warn)items+="<span class=\"warn\">※ "+it.warn+"</span>";items+="</div></li>";});items+="</ul>";}
-out.push("<details class=\"day\"<summary class=\"day-head\"<span class=\"day-num\" style=\"background:"+col+"\">"+(i+1)+"</span><span class=\"day-title\">"+zhMD(d.date,"Asia/Tokyo")+" · "+d.theme+"</span><span class=\"day-hint\">"+(d.anchor?"⚠️ 含航班锚点":"")+"</span></summary>");
-out.push("<div class=\"day-body\"<div>🏨 "+d.stays+"</div>");
+out.push("<details class=\"day\">summary class=\"day-head\">span class=\"day-num\" style=\"background:"+col+"\">"+(i+1)+"</span><span class=\"day-title\">"+zhMD(d.date,"Asia/Tokyo")+" · "+d.theme+"</span><span class=\"day-hint\">"+(d.anchor?"⚠️ 含航班锚点":"")+"</span></summary>");
+out.push("<div class=\"day-body\">div>🏨 "+d.stays+"</div>");
 if(d.anchor)out.push("<div style=\"margin-top:4px\">✈ "+d.anchor+"</div>");
 if(d.items&&d.items.length)out.push("<div class=\"tz-line\">⏰ 本日时刻均为东京当地时间（UTC+9）；需订票项目建议早订，时刻以官方为准。</div>");
 out.push(items+nav+"</div></details>");});
@@ -203,7 +225,7 @@ host.innerHTML=out.join("");
 host.querySelectorAll("button[data-nav]").forEach(function(b){b.onclick=function(){var i=+b.getAttribute("data-nav"),stops=DATA.days[i].route;if(stops&&stops.length>=2)window.open(dirLink(stops),"_blank","noopener");};});}
 function renderTodos(){var host=document.getElementById("todosList"),out=[];DATA.todos.forEach(function(t){var d=t.d?("<div style=\"font-size:.88rem;color:var(--sub);margin-top:2px\">"+t.d+"</div>"):"";out.push("<li>"+(t.prio===1?"<span class=\"prio\">[优先]</span>":"")+(t.tag?"<span class=\"todo-tag\">"+t.tag+"</span>":"")+" <b>"+t.t+"</b>"+d+"</li>");});host.innerHTML=out.join("");}
 function renderTips(){var host=document.getElementById("tipsList"),out=[];DATA.tips.forEach(function(t){out.push("<li><span class=\"ic\">"+t.ic+"</span><span>"+t.t+"</span></li>");});host.innerHTML=out.join("");}
-function renderLegend(){var host=document.getElementById("legend"),out=[];DATA.days.forEach(function(d,i){var col=DATA.DAY_COLORS[i%DATA.DAY_COLORS.length];out.push("<span class=\"li\"<span class=\"dot\" style=\"background:"+col+"\"></span>D"+(i+1)+" "+zhMD(d.date,"Asia/Tokyo")+" 宿「"+d.stays+"」</span>");});host.innerHTML=out.join("");}
+function renderLegend(){var host=document.getElementById("legend"),out=[];DATA.days.forEach(function(d,i){var col=DATA.DAY_COLORS[i%DATA.DAY_COLORS.length];out.push("<span class=\"li\">span class=\"dot\" style=\"background:"+col+"\"></span>D"+(i+1)+" "+zhMD(d.date,"Asia/Tokyo")+" 宿「"+d.stays+"」</span>");});host.innerHTML=out.join("");}
 var themeMode="auto";
 function themeFromClock(){var h=new Date().getHours();return (h>=6&&h<19)?"light":"dark";}
 function applyTheme(mode){var m=mode==="auto"?themeFromClock():mode;document.documentElement.setAttribute("data-theme",m);var b=document.getElementById("themeToggle");b.textContent=mode==="auto"?"🌓 自动（当前"+(m==="light"?"白天":"黑夜")+"）":(m==="light"?"☀️ 白天":"🌙 黑夜");}

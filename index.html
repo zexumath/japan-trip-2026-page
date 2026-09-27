@@ -63,6 +63,17 @@ ol.todos li:last-child{border-bottom:0}ol.todos li::marker{font-weight:700;color
 .tips li:last-child{border-bottom:0}.tips .ic{flex:none;width:26px;text-align:center}
 footer{margin-top:34px;text-align:center;color:var(--sub);font-size:.78rem;padding:0 8px}
 .privacy{color:var(--sub);border:1px dashed var(--line);border-radius:10px;padding:8px 12px;margin-top:10px}
+.mapwrap{border:1px solid var(--line);border-radius:14px;background:var(--card);padding:6px}
+.mapwrap svg{display:block;width:100%;height:auto}
+.map-fallback{color:var(--sub);text-align:center;padding:40px 10px}
+.map-note{color:var(--sub);font-size:.78rem;margin-top:8px;text-align:center}
+.deadlines{margin:0;padding-left:20px}
+.deadlines li{padding:8px 0 8px 4px;border-bottom:1px dashed var(--line);font-size:.92rem}
+.deadlines li:last-child{border-bottom:0}
+.deadlines li.soon{color:var(--accent)}
+.deadlines li.past{color:var(--sub);text-decoration:line-through}
+.dl-left{color:var(--sub);font-size:.8rem;margin-left:6px}
+.deadlines li.soon .dl-left{color:var(--accent)}
 @media (prefers-reduced-motion: reduce){*{animation:none!important;transition:none!important}}
 </style>
 </head><body><div class="wrap">
@@ -76,7 +87,7 @@ footer{margin-top:34px;text-align:center;color:var(--sub);font-size:.78rem;paddi
 <div class="events-more" id="eventsMore"></div>
 </div></section>
 <section><div class="card"><h2><span class="zh">行程总览</span> · 地图</h2>
-<div class="mapbox">🗾 手绘风 SVG 路线地图位<br><span style="font-size:.84rem">东京 → 京都 → 有马温泉 → 横滨 的路线与每晚住宿将按天用不同颜色绘制（等确认逐日细节后生成）。<br>下方颜色点对应「第几晚」，与逐日行程一致。</span></div>
+<div class="mapwrap" id="mapWrap"><div class="map-fallback">🗾 正在绘制路线图…</div></div>
 <div class="legend" id="legend"></div>
 </div></section>
 <section><div class="card"><h2><span class="zh">已确认</span> · 机票 / 酒店</h2>
@@ -84,6 +95,7 @@ footer{margin-top:34px;text-align:center;color:var(--sub);font-size:.78rem;paddi
 <div id="confirmedList"></div>
 </div></section>
 <section><div class="card"><h2><span class="zh">逐日行程</span> · 点日期展开当日详情</h2><div id="daysList"></div></div></section>
+<section><div class="card"><h2><span class="zh">取消 / 决策截止</span> ⏰</h2><div class="todo-note">这些日期前取消免费或可部分退款，过时可能收全款；按时间先后排列。</div><ol class="deadlines" id="deadlineList"></ol></div></section>
 <section><div class="card"><h2><span class="zh">待办清单</span></h2>
 <div class="todo-note">纯文字清单（不提供勾选）：勾选只会存在各自浏览器、多人看到不一致；办完一项告诉我，我更新页面。</div>
 <ol class="todos" id="todosList"></ol>
@@ -100,6 +112,33 @@ var DATA = {
   people: [
     { k:"A", n:"Ze Xu" }, { k:"B", n:"Wei Wang" }, { k:"C", n:"Li Ren" }, { k:"D", n:"Xiaojun Yang" }
   ],
+  deadlines: [
+    { date:"2026-10-29", time:"16:00", tz:"Asia/Tokyo", what:"京都民宿：免费取消最后期限（之后只能部分退款）" },
+    { date:"2026-11-17", time:"23:59", tz:"Asia/Tokyo", what:"东京 Dormy Inn（11/26 晚 1 间）：免费取消截止" },
+    { date:"2026-11-18", time:"23:59", tz:"Asia/Tokyo", what:"东京 Dormy Inn（11/27 晚 3 间）：免费取消截止" },
+    { date:"2026-11-21", time:"16:00", tz:"Asia/Tokyo", what:"京都民宿：部分退款最后期限（之后不可退）" },
+    { date:"2026-11-23", time:"23:59", tz:"Asia/Tokyo", what:"有马温泉 月光园：免费取消截止（之后收 30%）" },
+    { date:"2026-11-29", time:"23:59", tz:"Asia/Tokyo", what:"横滨 Kahala（2 间）：免费取消截止（之后收 100%）" }
+  ],
+  map: {
+    note: "示意路线（非比例地图）· 颜色=第几天 · 🏨=当晚住宿",
+    nodes: [
+      { id:"nrt", name:"成田 NRT", x:600, y:52, kind:"airport" },
+      { id:"hnd", name:"羽田 HND", x:662, y:196, kind:"airport" },
+      { id:"tokyo", name:"东京", x:492, y:112, nights:"第 1–2 晚", hotel:"Dormy Inn 银座", day:0 },
+      { id:"kyoto", name:"京都", x:252, y:146, nights:"第 3–4 晚", hotel:"上京区民宿", day:2 },
+      { id:"arima", name:"有马温泉", x:110, y:254, nights:"第 5 晚", hotel:"月光园 鸿胧馆", day:4 },
+      { id:"yokohama", name:"横滨", x:560, y:248, nights:"第 6–7 晚", hotel:"Kahala", day:5 }
+    ],
+    legs: [
+      { from:"nrt", to:"tokyo", dashed:true },
+      { from:"hnd", to:"tokyo", dashed:true },
+      { from:"tokyo", to:"kyoto", day:2, label:"D3 新干线" },
+      { from:"kyoto", to:"arima", day:4, label:"D5 京都→有马" },
+      { from:"arima", to:"yokohama", day:5, label:"D6 有马→横滨" },
+      { from:"yokohama", to:"hnd", day:7, label:"D8 回程" }
+    ]
+  },
   confirmed: [
     { kind:"flight", leg:"去程 A/B", status:"ok", statusText:"已出票",
       route:"纽瓦克 EWR → 东京成田 NRT", people:"A + B（同行程）",
@@ -331,6 +370,60 @@ function renderDays(){
 function renderTodos(){ var host=document.getElementById("todosList"), out=[]; DATA.todos.forEach(function(t){ var d=t.d?`<div style="font-size:.88rem;color:var(--sub);margin-top:2px">${t.d}</div>`:""; out.push(`<li>${t.prio===1?"<span class=\"prio\">[优先]</span>":""}${t.tag?`<span class="todo-tag">${t.tag}</span>`:""} <b>${t.t}</b>${d}</li>`); }); host.innerHTML=out.join(""); }
 function renderTips(){ var host=document.getElementById("tipsList"), out=[]; DATA.tips.forEach(function(t){ out.push(`<li><span class="ic">${t.ic}</span><span>${t.t}</span></li>`); }); host.innerHTML=out.join(""); }
 function renderLegend(){ var host=document.getElementById("legend"), out=[]; DATA.days.forEach(function(d,i){ var col=DATA.DAY_COLORS[i%DATA.DAY_COLORS.length]; out.push(`<span class="li"><span class="dot" style="background:${col}"></span>D${i+1} ${zhMD(d.date,"Asia/Tokyo")} 宿「${d.stays}」</span>`); }); host.innerHTML=out.join(""); }
+function renderDeadlines(){
+  var host=document.getElementById("deadlineList"); if(!host) return;
+  var now=Date.now(), out=[];
+  DATA.deadlines.forEach(function(d){
+    var e=wallEpoch(d.date,d.time,d.tz);
+    var left=Math.ceil((e-now)/86400000);
+    var cls=left<0?"past":(left<=7?"soon":"");
+    var tail=left>=0?`<span class="dl-left">还有 ${left} 天</span>`:`<span class="dl-left">已过</span>`;
+    out.push(`<li class="${cls}"><b>${d.date.slice(5)} ${d.time}</b>（日本时间）· ${d.what} ${tail}</li>`);
+  });
+  host.innerHTML=out.join("");
+}
+function renderMap(){
+  var host=document.getElementById("mapWrap"); if(!host) return;
+  var M=DATA.map; if(!M||!M.nodes||!M.nodes.length){ host.innerHTML=`<div class="map-fallback">🗾 地图数据缺失</div>`; return; }
+  var W=700,H=340, byId={}; M.nodes.forEach(function(n){ byId[n.id]=n; });
+  var s=[];
+  s.push(`<svg viewBox="0 0 ${W} ${H}" role="img" aria-label="手绘风行程路线图">`);
+  s.push(`<defs>`);
+  s.push(`<filter id="rough" x="-12%" y="-12%" width="124%" height="124%"><feTurbulence type="fractalNoise" baseFrequency="0.022" numOctaves="3" seed="7" result="n1"/><feDisplacementMap in="SourceGraphic" in2="n1" scale="3.6" xChannelSelector="R" yChannelSelector="G"/></filter>`);
+  s.push(`<filter id="rough2" x="-12%" y="-12%" width="124%" height="124%"><feTurbulence type="fractalNoise" baseFrequency="0.05" numOctaves="2" seed="19" result="n2"/><feDisplacementMap in="SourceGraphic" in2="n2" scale="2.2" xChannelSelector="R" yChannelSelector="G"/></filter>`);
+  s.push(`<filter id="paper"><feTurbulence type="fractalNoise" baseFrequency="0.8" numOctaves="2" seed="3"/><feColorMatrix type="saturate" values="0"/><feComponentTransfer><feFuncA type="linear" slope="0.05"/></feComponentTransfer></filter>`);
+  s.push(`</defs>`);
+  s.push(`<rect x="0" y="0" width="${W}" height="${H}" rx="14" fill="#fbf7ee"/>`);
+  s.push(`<path d="M 30 ${H*0.64} Q ${W*0.26} ${H*0.46} ${W*0.52} ${H*0.56} T ${W-30} ${H*0.40} L ${W-30} ${H-28} Q ${W*0.5} ${H-8} 30 ${H-28} Z" fill="#efe6cf" stroke="#cdbd97" stroke-width="1.3" filter="url(#rough2)" opacity="0.7"/>`);
+  s.push(`<g opacity="0.4" stroke="#8fb6c9" fill="none" stroke-width="1.5" filter="url(#rough2)">`);
+  for(var i=0;i<4;i++){ var yy=H-24-i*10; s.push(`<path d="M ${W-250+i*14} ${yy} q 17 -6 34 0 t 34 0 t 34 0"/>`); }
+  s.push(`</g>`);
+  M.legs.forEach(function(leg){
+    var a=byId[leg.from], b=byId[leg.to]; if(!a||!b) return;
+    var mx=(a.x+b.x)/2, my=(a.y+b.y)/2-26;
+    var dpath=`M ${a.x} ${a.y} Q ${mx} ${my} ${b.x} ${b.y}`;
+    if(leg.dashed){
+      s.push(`<path d="${dpath}" fill="none" stroke="#b9b09a" stroke-width="2" stroke-dasharray="5 6" stroke-linecap="round" filter="url(#rough2)"/>`);
+      return;
+    }
+    var col=DATA.DAY_COLORS[(leg.day||0)%DATA.DAY_COLORS.length];
+    s.push(`<path d="${dpath}" fill="none" stroke="#ffffff" stroke-width="8.5" stroke-linecap="round" opacity="0.95"/>`);
+    s.push(`<path d="${dpath}" fill="none" stroke="${col}" stroke-width="4" stroke-linecap="round" filter="url(#rough)"/>`);
+    if(leg.label){ s.push(`<text x="${mx}" y="${my-8}" font-size="10.5" fill="#7a7364" text-anchor="middle">${leg.label}</text>`); }
+  });
+  M.nodes.forEach(function(n){
+    if(n.kind==="airport"){
+      s.push(`<g><circle cx="${n.x}" cy="${n.y}" r="5.5" fill="#fff" stroke="#7d7460" stroke-width="1.5" filter="url(#rough2)"/><text x="${n.x}" y="${n.y-11}" font-size="11" fill="#7d7460" text-anchor="middle">✈ ${n.name}</text></g>`);
+      return;
+    }
+    var col=DATA.DAY_COLORS[(n.day||0)%DATA.DAY_COLORS.length];
+    s.push(`<g><circle cx="${n.x}" cy="${n.y}" r="13" fill="#fff" stroke="${col}" stroke-width="3" filter="url(#rough)"/><text x="${n.x}" y="${n.y+4}" font-size="12" text-anchor="middle">🏨</text><text x="${n.x}" y="${n.y-21}" font-size="14" font-weight="700" fill="#2c2a26" text-anchor="middle">${n.name}</text><text x="${n.x}" y="${n.y+31}" font-size="10.5" fill="#7a7364" text-anchor="middle">${n.nights} · ${n.hotel}</text></g>`);
+  });
+  s.push(`<g opacity="0.65"><path d="M 42 48 L 42 22 L 36 32 M 42 22 L 48 32" fill="none" stroke="#7a7364" stroke-width="1.7" filter="url(#rough2)"/><text x="42" y="62" font-size="11" fill="#7a7364" text-anchor="middle">N</text></g>`);
+  s.push(`<rect x="0" y="0" width="${W}" height="${H}" rx="14" filter="url(#paper)" opacity="0.45"/>`);
+  s.push(`</svg>`);
+  host.innerHTML=s.join("")+`<div class="map-note">${M.note||""}</div>`;
+}
 var themeMode="auto";
 function themeFromClock(){ var h=new Date().getHours(); return (h>=6&&h<19)?"light":"dark"; }
 function applyTheme(mode){ var m=mode==="auto"?themeFromClock():mode; document.documentElement.setAttribute("data-theme",m); var b=document.getElementById("themeToggle"); if(!b) return; b.textContent=mode==="auto"?"🌓 自动（当前"+(m==="light"?"白天":"黑夜")+"）":(m==="light"?"☀️ 白天":"🌙 黑夜"); }
@@ -340,7 +433,7 @@ window.addEventListener("DOMContentLoaded",function(){
   applyTheme(themeMode);
   var tg=document.getElementById("themeToggle"); if(tg) tg.onclick=function(){ themeMode=nextMode(); applyTheme(themeMode); try{ localStorage.setItem("tp_theme",themeMode); }catch(e){} };
   setInterval(function(){ if(themeMode==="auto") applyTheme("auto"); },60000);
-  renderNow(); renderPeople(); renderConfirmed(); renderDays(); renderTodos(); renderTips(); renderLegend();
+  renderNow(); renderPeople(); renderDeadlines(); renderMap(); renderConfirmed(); renderDays(); renderTodos(); renderTips(); renderLegend();
 });
 </script>
 </body>
